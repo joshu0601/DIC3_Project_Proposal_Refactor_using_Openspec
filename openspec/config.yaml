@@ -1,0 +1,36 @@
+schema: spec-driven
+
+# Project context: constraints an agent cannot infer from the code.
+context: |
+  Project: AI Plant Doctor, a Domain AI Agent (AIoT course project, DIC3-3) that diagnoses
+  tomato leaf problems for home gardeners and small greenhouse growers in central Taiwan.
+  Source of truth for rationale and references is docs/Proposal.md; DESIGN.md is the living
+  design doc. Reference numbers [n] follow Proposal.md.
+  Hard constraints:
+    - The image model alone never decides a diagnosis (disease triangle: image x environment x knowledge).
+    - Abiotic causes (water stress, nutrient, heat) are always part of the differential diagnosis.
+    - No pesticide name or dose may be shown unless it is cited from the knowledge base.
+    - Diagnosis latency p90 < 10 s; sensor node hardware <= NT$1,500.
+    - Every component (LLM, image model, vector DB) sits behind a replaceable interface.
+    - Reproducible: pinned dependencies, scripts and seeds.
+  Write artifacts in English (paper language); user-facing replies may be in Traditional Chinese.
+
+rules:
+  proposal:
+    - Map every new capability to the requirement IDs (F1-F8, N1-N6) it covers.
+    - State what is out of scope.
+  specs:
+    - Every threshold (tau, DSV alert, follow-up rounds, latency) must appear in a testable scenario.
+  design:
+    - Each decision lists at least one alternative considered and why it was rejected.
+    - Link decisions to the domain mindsets M1-M5 where relevant.
+  tasks:
+    - Each task names its verification (pytest test, script output, or observable behavior).
+
+operations:
+  apply:
+    guidance:
+      - Run python -m pytest after each task group and keep tests green.
+  archive:
+    guidance:
+      - Update DESIGN.md Change Log when a change is archived.
